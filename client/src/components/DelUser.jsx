@@ -15,6 +15,7 @@ const DelUser = ({ setIsDelete }) => {
         const res = await fetch(`/api/user/`, {
             method: "DELETE",
             headers: {
+                'Content-Type': 'application/json',
                 "token": localStorage.jwtToken
             }
         })

@@ -1,35 +1,51 @@
 import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 
 const inputBx = `flex-grow w-full h-12 px-4 my-4 transition duration-200 bg-white border border-gray-300 rounded shadow-sm focus:border-emerald-300 focus:outline-none ; `
 
 const types = ['RECIPE', 'PRODUCT', 'MENU_ITEM', 'INGREDIENTS', 'CUSTOM_FOOD',]
+const weekday = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 
-function AddItem({ setAddItem, user }) {
+function AddItem({ setAddItem, user, setUserDiet, userDiet }) {
 
-    const [data, setData] = useState(
-        {
-            date: 1589500800,
-            slot: 0, //either 1, 2, or 3 for breakfast, lunch, or dinner 
-            position: 0,
-            type: "",
-            value: {
-                title: ''
-            }
-        }
-    )
+    const [data, setData] = useState({
+        userId: user?._id,
+        day: '',
+        slot: '',
+        type: "",
+    })
     const [items, setItems] = useState([]);
     const [item, setItem] = useState('');
-
 
     const handleChange = (e) => {
         e.preventDefault();
         setData({ ...data, [e.target.name]: e.target.value })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
+        if (!items.length) return toast.error('Atleast one item required')
+        let jsonData = JSON.stringify({ ...data, items: items })
+        const res = await fetch('http://localhost:5000/api/diet/', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+                "token": localStorage.jwtToken
+            },
+            body: jsonData
+        })
+        const response = await res.json();
+        if (res.status == 201) {
+            const { data, msg } = response;
+            toast.success(msg)
+            setUserDiet(userDiet.length > 0 ? [...userDiet, data] : [data])
+            setAddItem(false)
+        }
+        else {
+            toast.error(response.msg)
+        }
     }
+
 
     const delOption = async (itemId) => {
         const index = items.findIndex((item) => item.itemId == itemId)
@@ -47,21 +63,32 @@ function AddItem({ setAddItem, user }) {
                 <h1 className='text-3xl lg:text-4xl font-semibold text-emerald-600 mb-4 text-center'>Add Diet</h1>
 
                 <select
-                    defaultValue=""
+                    className="flex-grow capitalize w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                    required
+                    name="day"
+                    value={data.day}
+                    onChange={handleChange}
+                >
+                    <option value={''} disabled>Select Day</option>
+                    {weekday.map(day => <option key={day} value={day} className='capitalize'>{day}</option>)}
+                </select>
+
+                <select
                     className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                    required
                     name="slot"
                     value={data.slot}
                     onChange={handleChange}
                 >
-                    <option value={0} disabled>Select Timing</option>
-                    <option value={1}>Breakfast</option>
-                    <option value={2}>Lunch</option>
-                    <option value={3}>Dinner</option>
+                    <option value={''} disabled>Select Timing</option>
+                    <option value={'breakfast'}>Breakfast</option>
+                    <option value={'lunch'}>Lunch</option>
+                    <option value={'dinner'}>Dinner</option>
                 </select>
 
                 <select
-                    defaultValue=""
                     className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                    required
                     name="type"
                     value={data.type}
                     onChange={handleChange}

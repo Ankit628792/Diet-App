@@ -2,23 +2,20 @@ import React, { useState } from 'react'
 import { Toaster } from 'react-hot-toast';
 import useBMI from '../hooks/useBMI'
 import useCaloryRequirement from '../hooks/useCaloryRequirement'
-import useGetDiet from '../hooks/useGetDiet';
 import useIdealWeight from '../hooks/useIdealWeight'
 import DelUser from './DelUser';
-import DietDetail from './DietDetail';
+import DietList from './DietList';
 import EditUser from './EditUser';
 
 function UserInfo({ user }) {
     const { age, weight, height, gender } = user;
-    const [targetCalory, setTargetCalory] = useState(2500)
+    const [targetCalory, setTargetCalory] = useState(user?.targetCalory || 2500)
     const [isDelete, setIsDelete] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
-    const [activeItem, setActiveItem] = useState(null);
 
     const bmi = useBMI({ age, weight, height })
     const idealWeight = useIdealWeight({ height, gender })
     const calory = useCaloryRequirement({ age, weight, height, gender })
-    const Diet = useGetDiet({ targetCalory: targetCalory })
 
     return (
         <>
@@ -95,48 +92,9 @@ function UserInfo({ user }) {
                     </div>
                 </section>
             }
-
-            <section>
-                <h1 className='text-xl sm:text-2xl lg:text-3xl font-semibold text-emerald-600'>
-                    7 Days Meal Plan :
-                </h1>
-                <div className=''>
-                    {Diet &&
-                        Object.getOwnPropertyNames(Diet).map((day, i) => {
-                            return <div key={i} className='bg-white rounded-2xl p-5 py-10 my-4'>
-                                <h1 className='text-xl sm:text-2xl lg:text-3xl font-semibold text-emerald-600 capitalize'>
-                                    {day}
-                                </h1>
-                                {
-                                    Object.getOwnPropertyNames(Diet[day]?.nutrients).map((item, i) =>
-                                        <div key={i} className=' bg-emerald-50 rounded-3xl p-5 inline-block m-4 shadow-md'>
-                                            <h1 className='font-semibold text-emerald-500 text-sm sm:text-base capitalize'>{item}</h1>
-                                            <p className='text-gray-600 text-base sm:text-lg font-medium'>{Diet[day]?.nutrients[item]}</p>
-                                        </div>
-                                    )
-                                }
-                                <div className='flex items-stretch justify-evenly gap-10 flex-wrap'>
-                                    {Diet[day]?.meals?.map((item, i) =>
-                                        <div key={i} className='bg-emerald-50 rounded-3xl p-5 max-w-xs text-center shadow-lg shadow-emerald-50'
-                                            // onClick={() => setActiveItem(item.id)}
-                                        >
-                                            <img className='w-60 rounded-2xl mx-auto object-cover' src={`https://webknox.com/recipeImages/${item.id}-556x370.jpg`} alt="" />
-                                            <h1 className='text-lg font-medium mt-2 text-gray-800'>{item.title}</h1>
-                                            <p className='font-semibold text-gray-500 text-lg mb-4'>Ready in: {item.readyInMinutes}, {item.servings} servings</p>
-                                            <a className='bg-white rounded-full px-4 py-2 text-lg font-medium text-emerald-600 hover:text-emerald-800' href={item.sourceUrl} target="_blank" rel="noopener noreferrer">More Details</a>
-                                        </div>
-                                    )}
-                                </div>
-
-                            </div>
-                        })
-                    }
-                </div>
-            </section>
-
+            {targetCalory && <DietList targetCalory={targetCalory} user={user} />}
             {isEdit && <EditUser isEdit={true} setIsEdit={setIsEdit} preData={user} />}
             {isDelete && <DelUser setIsDelete={setIsDelete} />}
-            {/* {activeItem && <DietDetail setActiveItem={setActiveItem} id={activeItem} />} */}
             <div><Toaster toastOptions={{ duration: 3000, className: 'text-center sm:min-w-max max-w-xl break-words' }} position="top-center" reverseOrder={true} /></div>
 
         </>

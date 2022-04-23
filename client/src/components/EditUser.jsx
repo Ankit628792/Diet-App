@@ -69,6 +69,7 @@ const EditUser = ({ setIsEdit, preData }) => {
                         type="number"
                         min={0}
                         max={150}
+                        required
                         name="age"
                         placeholder="Your age in years"
                         value={data.age}
@@ -78,6 +79,7 @@ const EditUser = ({ setIsEdit, preData }) => {
                         type="number"
                         min={0}
                         max={300}
+                        required
                         name="height"
                         placeholder="Your height in cm"
                         value={data.height}
@@ -85,6 +87,7 @@ const EditUser = ({ setIsEdit, preData }) => {
 
                     <input className={inputBx}
                         type="number"
+                        required
                         name="weight"
                         min={0}
                         max={1000}
@@ -95,6 +98,7 @@ const EditUser = ({ setIsEdit, preData }) => {
                     <select
                         defaultValue=""
                         className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                        required
                         name="gender"
                         value={data.gender}
                         onChange={handleChange}

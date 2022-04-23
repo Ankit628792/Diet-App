@@ -58,6 +58,7 @@ function Register() {
         <input className={inputBx}
           type="name"
           name="name"
+          required
           placeholder="Enter Your name"
           value={data.name}
           onChange={handleChange} />
@@ -65,6 +66,7 @@ function Register() {
         <input className={inputBx}
           type="email"
           name="email"
+          required
           placeholder="Enter an Email"
           value={data.email}
           onChange={handleChange} />

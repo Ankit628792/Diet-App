@@ -57,6 +57,7 @@ function Login() {
         <input className={inputBx}
           type="email"
           name="email"
+          required
           placeholder="Enter an Email"
           value={data.email}
           onChange={handleChange} />
@@ -64,6 +65,7 @@ function Login() {
         <input className={inputBx}
           type="password"
           name="password"
+          required
           placeholder="Enter an password"
           value={data.password}
           onChange={handleChange} />

@@ -11,10 +11,13 @@ app.use(cors())
 
 const user = require('./api/user.route')
 const session = require('./api/session.route')
+const diet = require('./api/diet.route')
 
 app.use('/api/user', user)
 app.use('/api/session', session)
-app.get('/login', (req,res) => {
+app.use('/api/diet', diet)
+
+app.get('/hello', (req,res) => {
     console.log('hello from server')
 })
 
