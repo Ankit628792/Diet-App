@@ -20,7 +20,9 @@ let userService = {
     },
     updateUser: async (_id, input) => {
         try {
-            return await User.findOneAndUpdate({ _id: _id }, input, { new: true })
+            const user = await User.findByIdAndUpdate({ _id: _id }, input, { new: true })
+            const token = await user.generateAuthToken();
+            return token
         } catch (error) {
             throw new Error(error)
         }

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { setUser } from "../action/user.action";
-const inputBx = `flex-grow w-full h-12 px-4 my-4 transition duration-200 bg-white border border-gray-300 rounded shadow-sm focus:border-cyan-300 focus:outline-none ; `
+const inputBx = `flex-grow w-full h-12 px-4 my-4 transition duration-200 bg-white border border-gray-300 rounded shadow-sm focus:border-emerald-300 focus:outline-none ; `
 
 function Register() {
   const navigate = useNavigate()
@@ -52,8 +52,8 @@ function Register() {
 
   return (
     <section className="w-full h-screen flex justify-center items-center">
-      <form onSubmit={handleSubmit} className='max-w-lg w-full border border-cyan-300 sm:shadow-cyan-50 shadow-none p-5 py-10 sm:p-10 rounded-xl sm:shadow-lg flex flex-col justify-center items-center'>
-        <h1 className='text-3xl lg:text-4xl font-semibold text-cyan-700 mb-4 text-center'>User Registration</h1>
+      <form onSubmit={handleSubmit} className='max-w-lg w-full border border-emerald-300 sm:shadow-emerald-50 shadow-none p-5 py-10 sm:p-10 rounded-xl sm:shadow-lg flex flex-col justify-center items-center'>
+        <h1 className='text-3xl lg:text-4xl font-semibold text-emerald-600 mb-4 text-center'>User Registration</h1>
 
         <input className={inputBx}
           type="name"
@@ -76,9 +76,9 @@ function Register() {
           value={data.password}
           onChange={handleChange} />
 
-        <input className="py-2 px-5 my-4 rounded-3xl bg-cyan-600 text-white max-w-max text-xl font-semibold cursor-pointer" type="submit" value="Register" />
+        <input className="py-2 px-5 my-4 rounded-3xl bg-emerald-500 text-white max-w-max text-xl font-semibold cursor-pointer" type="submit" value="Register" />
 
-        <p className="text-lg">Already have an account ? <Link to='/login' className="text-cyan-500 hover:text-cyan-700">Login</Link></p>
+        <p className="text-lg">Already have an account ? <Link to='/login' className="text-emerald-500 hover:text-emerald-600">Login</Link></p>
 
       </form>
       <div><Toaster toastOptions={{ duration: 3000, className: 'text-center sm:min-w-max max-w-xl break-words' }} position="top-center" reverseOrder={true} /></div>

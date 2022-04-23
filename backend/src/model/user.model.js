@@ -14,6 +14,9 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
     },
+    gender: {
+        type: String,
+    },
     age: {
         type: Number,
     },
@@ -44,8 +47,8 @@ userSchema.methods.comparePassword = async function (condidatePassword) {
 
 userSchema.methods.generateAuthToken = async function () {
     try {
-        let token = jwt.sign({ _id: this._id, name: this.name, email: this.email }, process.env.SECRET_KEY, {
-            expiresIn: 7 * 24 * 60 * 60 // 1 week in seconds
+        let token = jwt.sign({ _id: this._id, name: this.name, email: this.email, gender: this.gender, age: this.age, height: this.height, weight: this.weight }, process.env.SECRET_KEY, {
+            expiresIn: 7 * 24 * 60 * 60 // 1 week 
         })
         return token;
     } catch (error) {

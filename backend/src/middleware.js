@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 function decode(req, res) {
     console.log(req.header);
     const token = req.header('token')
-    console.log(token)
+    // console.log(token)
     if (!token) {
         res.status(402).send({ msg: 'token required' })
     }

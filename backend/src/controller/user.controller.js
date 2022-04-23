@@ -39,8 +39,8 @@ let user = {
 
         try {
             if (await getUser({ _id: _id })) {
-                await updateUser(_id, req.body)
-                res.status(200).send({ msg: 'User Updated Successfully!' })
+                const token = await updateUser(_id, req.body)
+                res.status(200).send({ msg: 'User Updated Successfully!', token: token })
             } else {
                 res.status(404).send({ msg: "Couldn't update user currently" })
             }
