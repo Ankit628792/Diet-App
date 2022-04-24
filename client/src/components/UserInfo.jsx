@@ -96,7 +96,6 @@ function UserInfo({ user }) {
             {isEdit && <EditUser isEdit={true} setIsEdit={setIsEdit} preData={user} />}
             {isDelete && <DelUser setIsDelete={setIsDelete} />}
             <div><Toaster toastOptions={{ duration: 3000, className: 'text-center sm:min-w-max max-w-xl break-words' }} position="top-center" reverseOrder={true} /></div>
-
         </>
     )
 }

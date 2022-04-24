@@ -14,11 +14,11 @@ let diet = {
 
     find: async (req, res) => {
         const { _id } = req.user;
-        if (!_id) res.status(404).send({ msg: "Couldn't get user" })
+        if (!_id) return res.status(404).send({ msg: "Couldn't get user" })
 
         try {
             const diet = await getDiet({ userId: _id });
-            if (!diet) res.status(400).send({ msg: "You've created any diet yet" })
+            if (!diet) return res.status(400).send({ msg: "You've created any diet yet" })
             else
                 res.status(200).send(diet)
         } catch (error) {
@@ -29,7 +29,7 @@ let diet = {
 
     delete: async (req, res) => {
         const { _id } = req.body;
-        if (!_id) res.status(404).send({ msg: "Couldn't get diet" })
+        if (!_id) return res.status(404).send({ msg: "Couldn't get diet" })
         try {
             if (await getDiet({ _id: _id })) {
                 await deleteDiet(_id)

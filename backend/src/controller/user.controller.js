@@ -4,7 +4,7 @@ let user = {
 
     create: async (req, res) => {
         const { name, email, password } = req.body;
-        if (!name || !email || !password) res.status(406).send({ msg: 'Fill all the details!' })
+        if (!name || !email || !password) return res.status(406).send({ msg: 'Fill all the details!' })
         try {
             if (!(await getUser({ email }))) {
                 const token = await newUser(req.body)
@@ -20,13 +20,13 @@ let user = {
 
     find: async (req, res) => {
         const { _id } = req.user;
-        if (!_id) res.status(404).send({ msg: "Couldn't get user" })
+        if (!_id) return res.status(404).send({ msg: "Couldn't get user" })
 
         try {
             const user = await getUser({ _id: _id });
-            if (!user) res.status(401).send({ msg: 'User Unauthorised' })
+            if (!user) return res.status(401).send({ msg: 'User Unauthorised' })
             else
-                res.status(200).send(user)
+                return res.status(200).send(user)
         } catch (error) {
             console.error(error)
             res.status(400).send({ msg: "Couldn't make request" })
@@ -35,7 +35,7 @@ let user = {
 
     update: async (req, res) => {
         const { _id, email } = req.user;
-        if (!email || !_id) res.status(406).send({ msg: 'insufficient the details!' });
+        if (!email || !_id) return res.status(406).send({ msg: 'insufficient the details!' });
 
         try {
             if (await getUser({ _id: _id })) {
@@ -52,7 +52,7 @@ let user = {
 
     delete: async (req, res) => {
         const { _id } = req.user;
-        if (!_id) res.status(404).send({ msg: "Couldn't get user" })
+        if (!_id) return res.status(404).send({ msg: "Couldn't get user" })
         try {
             if (await getUser({ _id: _id })) {
                 await deleteUser(_id)

@@ -6,7 +6,7 @@ let session = {
         const credentials = req.body
         try {
             const token = await createSession(credentials);
-            if (!token) res.status(400).send({ msg: 'Invalid Credentials' })
+            if (!token) return res.status(400).send({ msg: 'Invalid Credentials' })
             else
                 res.status(201).send({ token: token });
         } catch (error) {

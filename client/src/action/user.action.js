@@ -4,8 +4,16 @@ export const setUser = (user) => {
         payload: user
     }
 }
+
 export const removeUser = () => {
     return {
         type: 'REMOVE_USER',
+    }
+}
+
+export const setActveGroupId = (groupId) => {
+    return {
+        type: 'ACTIVE_GROUP',
+        payload: groupId
     }
 }

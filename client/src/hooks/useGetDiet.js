@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-const apiKey = '4331b387137c4e37a2388bf04971a06a';
-// const apiKey = '';
+// const apiKey = '4331b387137c4e37a2388bf04971a06a';
+const apiKey = '';
 function useGetDiet({ targetCalory }) {
     const [diet, setDiet] = useState(null);
     const [isFetching, setIsFetching] = useState(false);

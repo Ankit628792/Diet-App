@@ -1,6 +1,7 @@
 const initial = {
     isAuthenticated: false,
-    user: null
+    user: null,
+    groupId: null
 }
 
 const userReducer = (state = initial, action) => {
@@ -16,6 +17,12 @@ const userReducer = (state = initial, action) => {
             return {
                 isAuthenticated: false,
                 user: null
+            }
+
+        case 'ACTIVE_GROUP':
+            return {
+                ...state,
+                groupId: action.payload
             }
 
         default:
