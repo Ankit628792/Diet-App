@@ -19,7 +19,7 @@ let chatService = {
     },
     getAllMessages: async (query) => {
         try {
-            return await Message.find(query).lean();
+            return await Message.find(query).populate({ path: 'sender', select: 'name' }).lean();
         } catch (error) {
             throw new Error(error)
         }

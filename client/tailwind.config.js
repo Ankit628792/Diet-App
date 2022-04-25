@@ -7,8 +7,8 @@ module.exports = {
       keyframes: {
         "slide-in": {
           "0%": {
-            "-webkit-transform": "translateX(120%)",
-            transform: "translateX(120%)",
+            "-webkit-transform": "translateX(-120%)",
+            transform: "translateX(-120%)",
           },
           "100%": {
             "-webkit-transform": "translateX(0%)",

@@ -24,3 +24,19 @@ export const checkAuth = (navigate) => {
             navigate('/login')
     }
 }
+
+export const Cipher = (text) => {
+    let cText = '';
+    for (let i = 0; i < text.length; i++) {
+        cText += String.fromCharCode(text.charCodeAt(i) + 6)
+    }
+    return cText;
+}
+
+export const DeCipher = (text) => {
+    let dcText = '';
+    for (let i = 0; i < text.length; i++) {
+        dcText += String.fromCharCode(text.charCodeAt(i) - 6)
+    }
+    return dcText;
+}

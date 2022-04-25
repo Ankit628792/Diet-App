@@ -4,36 +4,15 @@ import { useDispatch } from 'react-redux';
 import { setActveGroupId } from '../../action/user.action';
 const inputBx = `flex-grow w-full h-12 px-4 my-4 transition duration-200 bg-white border border-gray-300 rounded shadow-sm focus:border-emerald-300 focus:outline-none `
 
-const Row = ({ name, id, admin, users, currentUser }) => {
+const Row = ({ name, id, admin }) => {
     const dispatch = useDispatch();
 
     const joinGroup = async () => {
         dispatch(setActveGroupId(id))
-        // if (users?.includes(currentUser)) {
-        // } else {
-        //     const res = await fetch('http://localhost:5000/api/chat/group/join', {
-        //         method: 'patch',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             "token": localStorage.jwtToken
-        //         },
-        //         body: JSON.stringify({ groupId: id, users: id })
-        //     })
-        //     const response = await res.json();
-        //     console.log(response)
-        //     if (res.status == 201) {
-        //         const { data, msg } = response;
-        //         toast.success(msg)
-        //         dispatch(setActveGroupId(id))
-        //     }
-        //     else {
-        //         toast.error(response.msg)
-        //     }
-        // }
     }
 
-    return <div className='p-2 my-2 border shadow rounded-lg flex items-center' onClick={joinGroup}>
-        <h1 className='inline-block w-12 h-12 rounded-full bg-emerald-600 text-white font-bold text-center border-4 border-emerald-100 md:text-3xl'>A</h1>
+    return <div className='p-2 my-2 shadow-md shadow-gray-50 hover:shadow-gray-100 cursor-pointer hover:scale-105 transition-transform duration-100 rounded-lg flex items-center' onClick={joinGroup}>
+        <h1 className='inline-block w-12 h-12 rounded-full bg-emerald-600 text-white font-bold text-center border-4 border-emerald-100 text-3xl'>A</h1>
         <div className='px-2'>
             <h1 className='text-lg md:text-xl font-semibold text-emerald-600 truncate'>{name}</h1>
             <p className='truncate text-sm text-gray-400'>Created by {admin}</p>
@@ -70,8 +49,8 @@ function Sidebar({ user, chats, setChats }) {
 
     return (
         <>
-            <div className='w-full max-w-xs px-2 min-h-full max-h-full overflow-y-auto relative'>
-                <button onClick={() => setIsPopup(!isPopup)} className='sticky top-0 bg-white p-5 w-full text-2xl font-bold shadow-lg text-emerald-700 cursor-pointer'>Create Group</button>
+            <div className='w-full max-w-[250px] md:max-w-xs px-2 min-h-full max-h-full overflow-y-auto relative'>
+                <button onClick={() => setIsPopup(!isPopup)} className='sticky top-0 bg-white p-5 w-full text-3xl pb-6 font-bold border-b text-emerald-700 cursor-pointer'>Create Group</button>
                 {
                     chats?.length > 0 && chats?.map(chat => <Row key={chat._id} name={chat.groupName} id={chat._id} users={chat.users} currentUser={user._id} admin={chat.adminName} />)
                 }

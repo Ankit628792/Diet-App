@@ -5,7 +5,6 @@ let message = {
     create: async (req, res) => {
         try {
             const data = await newMessage(req.body)
-            console.log("create", data)
             res.status(201).send({ msg: 'Chat Registered Successfully!', data: data })
         } catch (error) {
             console.error(error)
@@ -13,14 +12,11 @@ let message = {
         }
     },
     findAll: async (req, res) => {
-        console.log(req.params)
         const { groupId } = req.params;
-        console.log("group Id", groupId)
         if (!groupId) return res.status(404).send({ msg: "Couldn't get chat" })
         const query = { groupId: groupId }
         try {
             const chat = await getAllMessages(query);
-            console.log("find group", chat)
             if (chat) {
                 res.status(200).send(chat)
             }
@@ -49,7 +45,7 @@ let group = {
         }
     },
     update: async (req, res) => {
-        const { groupId, users } = req.body
+        const { groupId } = req.body
         try {
             if (await getChat({ _id: groupId })) {
                 const data = await updateChat(groupId, req.body)
@@ -80,9 +76,7 @@ let group = {
 
     findAll: async (req, res) => {
         try {
-            console.log('inside find gr')
             const chat = await getAllChat();
-            console.log(chat)
             if (chat.length > 0) {
                 res.status(200).send(chat)
             }
