@@ -76,7 +76,6 @@ function Body({ groupId, user }) {
         if (res.status == 201) {
             const { data } = response;
             setMessage('')
-            console.log(data)
             setMessages((prev) => [...prev, data])
         }
         else {

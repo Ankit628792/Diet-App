@@ -49,13 +49,13 @@ function Sidebar({ user, chats, setChats }) {
 
     return (
         <>
-            <div className='w-full max-w-[250px] md:max-w-xs px-2 min-h-full max-h-full overflow-y-auto relative'>
+           {<div className='w-full max-w-[250px] md:max-w-xs px-2 min-h-full max-h-full overflow-y-auto relative'>
                 <button onClick={() => setIsPopup(!isPopup)} className='sticky top-0 bg-white p-5 w-full text-3xl pb-6 font-bold border-b text-emerald-700 cursor-pointer'>Create Group</button>
                 {
                     chats?.length > 0 && chats?.map(chat => <Row key={chat._id} name={chat.groupName} id={chat._id} users={chat.users} currentUser={user._id} admin={chat.adminName} />)
                 }
 
-            </div>
+            </div>}
             {isPopup && <div className='fixed top-0 left-0 w-full h-full min-h-screen bg-gray-50 bg-opacity-20 backdrop-filter backdrop-blur grid place-items-center z-10'>
                 <form onSubmit={createGroup} className='max-w-lg w-full bg-white border border-emerald-300 sm:shadow-emerald-50 shadow-none p-5 py-10 sm:p-10 rounded-xl sm:shadow-lg flex flex-col justify-center items-center'>
                     <h1 className='text-3xl lg:text-4xl font-semibold text-emerald-600 mb-4 text-center'>Name of Group</h1>

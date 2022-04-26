@@ -42,11 +42,11 @@ io.on("connection", (socket) => {
         socket.join(room);
         console.log("User Joined Room: " + room);
     });
+    
     socket.on("typing", (room) => socket.in(room).emit("typing"));
     socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
 
     socket.on("new message", (newMessage) => {
-        console.log(newMessage)
         socket.in(newMessage.groupId).emit("message recieved", newMessage);
     });
 

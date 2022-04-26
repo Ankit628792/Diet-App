@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
 import { setActveGroupId } from '../../action/user.action'
@@ -22,11 +22,12 @@ function Chat() {
         })()
     }, [])
 
+
     return (
         <>
-            <main className="flex items-center w-full min-h-screen overflow-hidden bg-emerald-50">
+            <main id="divToPrint" className="flex items-center w-full min-h-screen overflow-hidden bg-emerald-50">
                 <Navbar />
-                <div className='w-full max-w-5xl mx-auto h-[700px] overflow-hidden bg-white rounded-lg flex items-stretch border-2'>
+                <div className='w-full max-w-5xl mx-auto h-[700px] overflow-hidden bg-white rounded-lg flex items-stretch border-2 m-4'>
                     {chats ?
                         <>
                             <Sidebar user={user} setChats={setChats} chats={chats} />
@@ -36,7 +37,6 @@ function Chat() {
                         <h1></h1>}
                 </div>
             </main>
-
             <div><Toaster toastOptions={{ duration: 3000, className: 'text-center sm:min-w-max max-w-xl break-words' }} position="top-center" reverseOrder={true} /></div>
         </>
     )
