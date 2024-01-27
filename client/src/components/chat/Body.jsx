@@ -15,7 +15,7 @@ function Body({ groupId, user }) {
     const scrollRef = useRef()
 
     const fetchChat = async () => {
-        const url = `http://localhost:5000/api/chat/group/${groupId}`;
+        const url = `https://diet-backend-0hdj.onrender.com/api/chat/group/${groupId}`;
         const options = {
             method: 'GET',
             headers: {
@@ -31,7 +31,7 @@ function Body({ groupId, user }) {
 
     useEffect(() => {
         if (user && groupId) {
-            socket.current = io('http://localhost:5000')
+            socket.current = io('https://diet-backend-0hdj.onrender.com')
             socket.current.emit("join chat", groupId);
             fetchChat()
         }
@@ -64,7 +64,7 @@ function Body({ groupId, user }) {
         }
 
         socket.current.emit("new message", data);
-        const res = await fetch('http://localhost:5000/api/chat/', {
+        const res = await fetch('https://diet-backend-0hdj.onrender.com/api/chat/', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',

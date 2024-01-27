@@ -26,7 +26,7 @@ function AddItem({ setAddItem, user, setUserDiet, userDiet }) {
         e.preventDefault();
         if (!items.length) return toast.error('Atleast one item required')
         let jsonData = JSON.stringify({ ...data, items: items })
-        const res = await fetch('http://localhost:5000/api/diet/', {
+        const res = await fetch('https://diet-backend-0hdj.onrender.com/api/diet/', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',

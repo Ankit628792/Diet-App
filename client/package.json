@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "https://diet-backend-0hdj.onrender.com",
   "dependencies": {
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",

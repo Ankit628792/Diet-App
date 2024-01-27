@@ -22,7 +22,7 @@ function Register() {
   }
 
   const registerUser = async (data) => {
-    const res = await fetch('http://localhost:5000/api/user/', {
+    const res = await fetch('https://diet-backend-0hdj.onrender.com/api/user/', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json'

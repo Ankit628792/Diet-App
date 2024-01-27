@@ -14,7 +14,7 @@ export default function DietList({ targetCalory, user }) {
     }, [targetCalory])
 
     const updateUser = async ({ calory }) => {
-        const res = await fetch('http://localhost:5000/api/user/', {
+        const res = await fetch('https://diet-backend-0hdj.onrender.com/api/user/', {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

@@ -27,7 +27,7 @@ function Sidebar({ user, chats, setChats }) {
     const createGroup = async (e) => {
         e.preventDefault()
         const jsonData = JSON.stringify({ groupName: inputRef.current.value || 'Unknown', groupAdmin: user._id, adminName: user.name })
-        const res = await fetch('http://localhost:5000/api/chat/group', {
+        const res = await fetch('https://diet-backend-0hdj.onrender.com/api/chat/group', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',

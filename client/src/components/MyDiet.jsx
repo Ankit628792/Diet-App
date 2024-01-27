@@ -16,7 +16,7 @@ function MyDiet() {
     const [userDiet, setUserDiet] = useState([])
 
     const fetchDiet = async () => {
-        const res = await fetch('http://localhost:5000/api/diet/', {
+        const res = await fetch('https://diet-backend-0hdj.onrender.com/api/diet/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

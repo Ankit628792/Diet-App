@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 function Header({ groupId }) {
     const [group, setGroup] = useState(null)
     const fetchChat = async () => {
-        const url = `http://localhost:5000/api/chat/details/${groupId}`;
+        const url = `https://diet-backend-0hdj.onrender.com/api/chat/details/${groupId}`;
 
         const options = {
             method: 'GET',

@@ -14,7 +14,7 @@ function Chat() {
 
     useEffect(() => {
         (async () => {
-            const data = await fetch('http://localhost:5000/api/chat/group', { headers: { "token": localStorage.jwtToken } }).then(res => res.json()).catch(e => console.log(e))
+            const data = await fetch('https://diet-backend-0hdj.onrender.com/api/chat/group', { headers: { "token": localStorage.jwtToken } }).then(res => res.json()).catch(e => console.log(e))
             if (data?.length > 0) {
                 dispatch(setActveGroupId(data[0]._id))
                 setChats(data)
